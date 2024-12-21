@@ -1,7 +1,7 @@
 # pyhiamp
 
 
-<img align="right" src="https://github.com/lucasbaldezzari/neuroiaghiamp/blob/main/neuroialogo.png" alt="Neuro-IA Lab" width="210">
+<img align="right" src="neuroialogo.png" alt="Neuro-IA Lab" width="210">
 
 **PyHIamp** (PHA) es una librería para recibir y almacenar datos (EEG, EMG, ECG y EOG) provenientes del amplifcador [g.HIamp](https://www.gtec.at/product/g-hiamp-256-channel-biosignal-amplifier/?srsltid=AfmBOopsnqXDTC9HQtDxvuPybDzjuMH8TxZDeXKLqy3aMGgrcF2gX5dc) entre otras características (ver sección [Características](#características)).
 

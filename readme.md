@@ -37,9 +37,6 @@ Los datos provenientes del amplificador, como los eventos y marcadores generados
 - Matplotlib
 - Pandas
 - PyQt5
-
-
-
 - [liblsl](https://github.com/sccn/liblsl/releases)
 
 # Instalación
@@ -52,9 +49,25 @@ Se recomienda crear un entorno virtual para instalar las dependencias de python 
 
 El primer paso es descargar la librería [liblsl](https://github.com/sccn/liblsl). Hay dos formas de obtener la librería:
 1. Desde la [Release page](https://github.com/sccn/liblsl/releases)
-2. Desde la [nube de Anaconda](https://anaconda.org/conda-forge/liblsl) ejecutando ``conda install -c conda-forge liblsl`` (recomendada habiendo activado el entorno virtual del paso 1.)
+2. Desde la [nube de Anaconda](https://anaconda.org/conda-forge/liblsl) ejecutando ``conda install -c conda-forge liblsl`` (recomendada habiendo activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
 
-Más info [acá]((https://github.com/sccn/liblsl?tab=readme-ov-file#getting-and-using-liblsl))
+Más info [Getting and using liblsl](https://github.com/sccn/liblsl?tab=readme-ov-file#getting-and-using-liblsl).
+
+#### 3. Instalando PyLSL
+
+Para instalar PyLSL se puede usar el comando ``pip install pysls`` (es importante haber activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
+
+#### 4. Instalando PyHIamp
+
+Para instalar PyHIamp se puede usar el comando ``pip install pyhiamp`` (es importante haber activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
+
+#### 5. Instalando LabRecorder
+
+Descargar e instalar [LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder).
+
+#### 6. Uso
+
+En teoría, todo está listo para usar PyHIamp.
 
 ## Instaladores y ropositorios de paquetes
 

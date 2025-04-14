@@ -15,13 +15,19 @@ PyHIamp es un desarrollo del **Laboratorio de Neruociencias e Inteligencia Artif
 
 # Funcionamiento geneal
 
-El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos registrados por el trigbox a través de g.NEEDAccess. Utilizando el protocolo LSL, los datos son transmitidos a través de la red local a una dirección IP y puerto espec
-íficos. En el lado del cliente, PyLSL recibe los datos y los almacena en un archivo CSV. El archivo CSV se puede abrir con cualquier editor de texto o programa de hoja de cálculo.
+El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos registrados por el trigbox a través de g.NEEDAccess. Utilizando el protocolo LSL, los datos son transmitidos a través de la red local a una dirección IP y puerto específicos. En el lado del cliente, PyLSL recibe los datos y los almacena en un archivo XDF.
 
 - ¿Qué rol juega [App-LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder)?
 - ¿Cómo envío marcadores desde LSL hacia pylsl? ¿puedo hacerlo desde pylsl hacia LSL?
 
 # Características
+
+- [ ] Recibir datos de EEG
+- [ ] Recibir datos de EMG
+- [ ] Recibir datos de ECG
+- [ ] Recibir datos de EOG
+- [ ] Recibir datos de eventos
+- [x] Recibir datos de marcadores
 
 # Dependencias
 
@@ -38,7 +44,7 @@ El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos regis
 
 # Instalación
 
-# Ejemplo de uso
+# Ejemplos de uso
 
 # Documentación
 
@@ -47,3 +53,4 @@ El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos regis
 # Referencias
 
 - [Lab Streaming Layers for Brain Data with Python](https://www.youtube.com/watch?v=oLulfdNI3E0&ab_channel=EsbenKran)
+- [Demo 1 The Lab Streaming Layer](https://www.youtube.com/watch?v=Y1at7yrcFW0&ab_channel=TheQualcommInstitute)

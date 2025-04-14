@@ -15,19 +15,15 @@ PyHIamp es un desarrollo del **Laboratorio de Neruociencias e Inteligencia Artif
 
 # Funcionamiento geneal
 
-El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos registrados por el trigbox a través de g.NEEDAccess. Utilizando el protocolo LSL, los datos son transmitidos a través de la red local a una dirección IP y puerto específicos. En el lado del cliente, PyLSL recibe los datos y los almacena en un archivo XDF.
+El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos registrados por el trigbox a través de g.NEEDAccess. Utilizando el protocolo LSL, los datos son transmitidos a través de la red local con una IP y puerto específicos. Por otro lado, usando PyLSL se generan eventos y marcadores importantes de la sesión expermiental. Además, se pueden recibir datos para graficarlos en tiempo real.
 
-- ¿Qué rol juega [App-LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder)?
-- ¿Cómo envío marcadores desde LSL hacia pylsl? ¿puedo hacerlo desde pylsl hacia LSL?
+Los datos provenientes del amplificador, como los eventos y marcadores generados con PyLSL se guardan en un archivo XDF a través de [LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder)
 
 # Características
 
-- [ ] Recibir datos de EEG
-- [ ] Recibir datos de EMG
-- [ ] Recibir datos de ECG
-- [ ] Recibir datos de EOG
-- [ ] Recibir datos de eventos
-- [x] Recibir datos de marcadores
+- [x] Recibir datos de señal y eventos provenientes de g.HIamp y almacenarlos en un archivo XDF usando LabRecorder.
+- [x] Generar eventos enviarlos a través de LSL.
+- [x] Almacenar los datos en un archivo XDF usando [XDF](https://github.com/sccn/xdf).
 
 # Dependencias
 
@@ -42,15 +38,19 @@ El emplificador g.HIAMP envía los datos de la señal de EEG y los eventos regis
 - Pandas
 - PyQt5
 
+# Instaladores y ropositorios de paquetes
+
+- [liblsl][https://github.com/sccn/liblsl/releases]
+
 # Instalación
 
 # Ejemplos de uso
 
 # Documentación
 
-# Licencia
-
 # Referencias
 
 - [Lab Streaming Layers for Brain Data with Python](https://www.youtube.com/watch?v=oLulfdNI3E0&ab_channel=EsbenKran)
 - [Demo 1 The Lab Streaming Layer](https://www.youtube.com/watch?v=Y1at7yrcFW0&ab_channel=TheQualcommInstitute)
+
+## Licencia

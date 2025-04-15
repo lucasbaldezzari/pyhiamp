@@ -22,28 +22,30 @@ Los datos provenientes del amplificador, como los eventos y marcadores generados
 ## Características
 
 - [x] Recibir datos de señal y eventos provenientes de g.HIamp y almacenarlos en un archivo XDF usando LabRecorder.
-- [x] Generar eventos enviarlos a través de LSL.
-- [x] Almacenar los datos en un archivo XDF usando [XDF](https://github.com/sccn/xdf).
+- [x] Generar eventos y enviarlos a través de LSL.
+- [x] Almacenar los datos en un archivo [XDF](https://github.com/sccn/xdf) usando LabRecorder.
+- [x] Entorno gráfico para ejecutar los módulos de PyHiamp de manera separada, con mensajes de estado de sesión, entre otros datos útiles.
 
 ## Dependencias
 
-- g.NeedAccess (g.HIamp)
-- [Lab Streaming Layer](https://github.com/labstreaminglayer) (LSL). Docs [here](https://labstreaminglayer.readthedocs.io/).
+- [liblsl](https://github.com/sccn/liblsl/releases)
+- [Lab Streaming Layer](https://github.com/sccn/labstreaminglayer/) (LSL). Docs [here](https://labstreaminglayer.readthedocs.io/).
 - [App-Input](https://github.com/labstreaminglayer/App-Input)
-- PyLSL
-- Python 3.10+
+- g.NeedAccess (g.HIamp)
+- Python 3.12
+- [PyLSL](https://github.com/labstreaminglayer/pylsl)
+- [pyxdf](https://github.com/xdf-modules/pyxdf/tree/main). Formato de los archivos XDF puede estudiarse [acá](https://github.com/sccn/xdf/wiki/Specifications). La meta data recomendada para archivos que contengan información de EEG se puede encontrar [acá](https://github.com/sccn/xdf/wiki/EEG-Meta-Data).
 - NumPy
 - SciPy
 - Matplotlib
 - Pandas
-- PyQt5
-- [liblsl](https://github.com/sccn/liblsl/releases)
+- PyQt6
 
 # Instalación
 
 #### 1. Creando un entorno virtual
 
-Se recomienda crear un entorno virtual para instalar las dependencias de python y los archivos de liblsl. Para crear un entorno virtual se puede usar el comando ``conda create --name <nombre_entorno> python=3.12``
+Se recomienda crear un entorno virtual para instalar las dependencias de python y los archivos de *liblsl*. Para crear un entorno virtual se puede usar el comando ``conda create --name <nombre_entorno> python=3.12`` (asumiendo que se tiene instalado [miniconda](https://www.anaconda.com/download)).
 
 #### 2. Descargando liblsl
 

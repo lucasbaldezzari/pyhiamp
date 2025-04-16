@@ -1,6 +1,5 @@
 # pyhiamp
 
-
 <img align="right" src="neuroialogo.png" alt="Neuro-IA Lab" width="210">
 
 **PyHIamp** (PHA) es una librería para recibir y almacenar datos (EEG, EMG, ECG y EOG) provenientes del amplifcador [g.HIamp](https://www.gtec.at/product/g-hiamp-256-channel-biosignal-amplifier/?srsltid=AfmBOopsnqXDTC9HQtDxvuPybDzjuMH8TxZDeXKLqy3aMGgrcF2gX5dc) entre otras características (ver sección [Características](#características)).
@@ -9,9 +8,13 @@ PHA utiliza [Lab Streaming Layer](https://github.com/sccn/labstreaminglayer/?tab
 
 PyHIamp es un desarrollo del **Laboratorio de Neruociencias e Inteligencia Artificial Aplicada** (Neuro-IA Lab) de la *Universidad Tecnológica del Uruguay*.
 
-### Autor
+## Autor
 
 - [Lucas Baldezzari](https://www.linkedin.com/in/lucasbaldezzari/)
+
+## Versión
+
+- 0.0.1: Se genera estructura de carpetas y se generan los nombres de las clases, *Sender*, *Reciever* y *Logger* del módulo *pyhiamp. Se trabaja sobre signal.dummyHiamp.
 
 ## Funcionamiento geneal
 
@@ -21,65 +24,68 @@ Los datos provenientes del amplificador, como los eventos y marcadores generados
 
 ## Características
 
-- [x] Recibir datos de señal y eventos provenientes de g.HIamp y almacenarlos en un archivo XDF usando LabRecorder.
-- [x] Generar eventos y enviarlos a través de LSL.
-- [x] Almacenar los datos en un archivo [XDF](https://github.com/sccn/xdf) usando LabRecorder.
-- [x] Entorno gráfico para ejecutar los módulos de PyHiamp de manera separada, con mensajes de estado de sesión, entre otros datos útiles.
+- [ ] Recibir datos de señal y eventos provenientes de g.HIamp y almacenarlos en un archivo XDF usando LabRecorder.
+- [X] Generar eventos y enviarlos a través de LSL.
+- [X] Almacenar los datos en un archivo [XDF](https://github.com/sccn/xdf) usando LabRecorder.
+- [ ] Entorno gráfico para ejecutar los módulos de PyHiamp de manera separada, con mensajes de estado de sesión, entre otros datos útiles.
+- [X] Sintetizador de señal para emular el g.HIAMP.
 
 ## Dependencias
 
 - [liblsl](https://github.com/sccn/liblsl/releases)
-- [Lab Streaming Layer](https://github.com/sccn/labstreaminglayer/) (LSL). Docs [here](https://labstreaminglayer.readthedocs.io/).
+- [Lab Streaming Layer](https://github.com/sccn/labstreaminglayer/) (LSL). Documentación oficial [acá](https://labstreaminglayer.readthedocs.io/).
 - [App-Input](https://github.com/labstreaminglayer/App-Input)
 - g.NeedAccess (g.HIamp)
 - Python 3.12
 - [PyLSL](https://github.com/labstreaminglayer/pylsl)
-- [pyxdf](https://github.com/xdf-modules/pyxdf/tree/main). Formato de los archivos XDF puede estudiarse [acá](https://github.com/sccn/xdf/wiki/Specifications). La meta data recomendada para archivos que contengan información de EEG se puede encontrar [acá](https://github.com/sccn/xdf/wiki/EEG-Meta-Data).
+- [pyxdf](https://github.com/xdf-modules/pyxdf/tree/main) para lectura de archivos XDF. El formato de los XDF puede estudiarse [acá](https://github.com/sccn/xdf/wiki/Specifications). La meta data recomendada para archivos que contengan información de EEG se puede encontrar [acá](https://github.com/sccn/xdf/wiki/EEG-Meta-Data).
 - NumPy
 - SciPy
 - Matplotlib
 - Pandas
 - PyQt6
 
-# Instalación
+## Instalación
 
-#### 1. Creando un entorno virtual
+### 1. Creando un entorno virtual
 
 Se recomienda crear un entorno virtual para instalar las dependencias de python y los archivos de *liblsl*. Para crear un entorno virtual se puede usar el comando ``conda create --name <nombre_entorno> python=3.12`` (asumiendo que se tiene instalado [miniconda](https://www.anaconda.com/download)).
 
-#### 2. Descargando liblsl
+### 2. Descargando liblsl
 
 El primer paso es descargar la librería [liblsl](https://github.com/sccn/liblsl). Hay dos formas de obtener la librería:
-1. Desde la [Release page](https://github.com/sccn/liblsl/releases)
-2. Desde la [nube de Anaconda](https://anaconda.org/conda-forge/liblsl) ejecutando ``conda install -c conda-forge liblsl`` (recomendada habiendo activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
+
+1. Desde la [Release page](https://github.com/sccn/liblsl/releases).
+2. Desde la [nube de Anaconda](https://anaconda.org/conda-forge/liblsl) ejecutando ``conda install -c conda-forge liblsl`` (forma recomendada habiendo activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
 
 Más info [Getting and using liblsl](https://github.com/sccn/liblsl?tab=readme-ov-file#getting-and-using-liblsl).
 
-#### 3. Instalando PyLSL
+### 3. Instalando PyLSL
 
 Para instalar PyLSL se puede usar el comando ``pip install pysls`` (es importante haber activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
 
-#### 4. Instalando PyHIamp
+### 4. Instalando PyHIamp
 
 Para instalar PyHIamp se puede usar el comando ``pip install pyhiamp`` (es importante haber activado el entorno virtual del paso [1](https://github.com/lucasbaldezzari/pyhiamp?tab=readme-ov-file#1-creando-un-entorno-virtual)).
 
-#### 5. Instalando LabRecorder
+### 5. Instalando LabRecorder
 
 Descargar e instalar [LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder).
 
-#### 6. Uso
+### 6. Uso
 
 En teoría, todo está listo para usar PyHIamp.
 
 ## Instaladores y ropositorios de paquetes
 
-# Ejemplos de uso
+## Ejemplos de uso
 
-# Documentación
+## Documentación
 
-# Referencias
+## Referencias
 
 - [Lab Streaming Layers for Brain Data with Python](https://www.youtube.com/watch?v=oLulfdNI3E0&ab_channel=EsbenKran)
 - [Demo 1 The Lab Streaming Layer](https://www.youtube.com/watch?v=Y1at7yrcFW0&ab_channel=TheQualcommInstitute)
+- [liblsl docs](https://labstreaminglayer.readthedocs.io/projects/liblsl/index.html)
 
 ## Licencia

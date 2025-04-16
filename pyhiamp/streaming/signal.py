@@ -78,14 +78,17 @@ class dummyHiamp:
         cap.append_child_value("labelscheme", labelscheme)
 
 
-    def startStreaming(self,chunk_size=32, sleep=0.01, total_time = 60, delay=0.0, terminate=True):
+    def startStreaming(self,chunk_size=32, sleep=0.01, total_time = 60, delay=0.0, terminate=True, **kwargs):
         """
         Starting the streaming of the dummy Hiamp.
 
         Parameters:
+        - chunk_size (int): Size of the chunk to send. Default is 32 samples.
         - sleep (float): Delay in seconds. Default is 0.01 seconds.
         - total_time (int): Total time in seconds. Default is 60 seconds.
         - delay (float): Delay in seconds. Default is 0.0 seconds. This is used to simulate the delay of the signal e.g., as if coming from some external hardware with known latency.
+        - terminate (bool): If True, the stream will be terminated after the total time. Default is True.
+        - kwargs: Additional arguments to pass to the _getSyntheticEEG method.
         """
         total_time=int(total_time)
         self.outlet = pylsl.StreamOutlet(self.info, chunk_size, total_time)
@@ -96,12 +99,9 @@ class dummyHiamp:
             elapsed_time = pylsl.local_clock() - start_time
             required_samples = int(self.srate * elapsed_time) - sent_samples
             if required_samples > 0:
-                # make a chunk==array of length required_samples, where each element in the array
-                # is a new random n_channels sample vector
-                mychunk = [
-                    [np.random.rand() for chan_ix in range(self.n_channels)]
-                    for samp_ix in range(required_samples)
-                ]
+                # if the required samples are more than the chunk size, we need to send them in chunks
+
+                mychunk=self._getSyntheticEEG(required_samples, **kwargs)
                 stamp = pylsl.local_clock() - delay
                 # now send it and wait for a bit
                 self.outlet.push_chunk(mychunk, stamp)
@@ -111,11 +111,42 @@ class dummyHiamp:
                 break
 
             time.sleep(sleep)
+        self.chunk = mychunk
 
         print(f"Finished streaming. Total time: {round(elapsed_time,5)} seconds.")
         if terminate:
             del self.outlet
             print("Stream outlet deleted.")
+
+    def _getSyntheticEEG(self, n_samples, peak_freq=14, fwhm=15):
+        """
+        This function generates a synthetic EEG signal using a Gaussian distribution.
+        The signal is generated using the inverse Fourier transform of a random spectrum.
+        The spectrum is generated using a Gaussian distribution with a given peak frequency and full width at half maximum (FWHM).
+
+        Parameters:
+        - n_samples: Number of samples to generate.
+        - peak_freq: Peak frequency of the Gaussian distribution. Default is 14 Hz.
+        - fwhm: Full width at half maximum (FWHM) of the Gaussian distribution. Default is 15 Hz.
+        """
+
+        hz = np.linspace(0,self.srate,n_samples) #frequencies
+        s = fwhm*(2*np.pi-1)/(4*np.pi) #normalized width
+        x  = hz-peak_freq #shifted frequencies
+        gauss = np.exp((-.5)*(x/s)**2) #gaussian
+
+        ##nd.array with shape channels x required_samples
+        data = np.zeros((self.n_channels, n_samples))
+        for ch in range(self.n_channels):
+            #fourier coefficients for the random spectrum
+            fc = np.random.rand(n_samples)*np.exp(2j*np.pi*np.random.rand(n_samples))
+            fc = fc*gauss
+            #inverse fourier transform to get the signal
+            data[ch] = np.fft.ifft(fc).real
+
+        data*=self.scale #scaling the signal
+
+        return data.T.tolist() #returning a list of lists, where each list is a channel with the samples
 
     def rename_channels(self, mapping:dict):
         """
@@ -125,34 +156,6 @@ class dummyHiamp:
         - mapping: Dictionary with the mapping of the channels. The keys are the old names and the values are the new names (e.g., {'CH1':"Fz"}).
         """
         pass
-
-    def _setGaussian(self):
-        """
-        Set the gaussian to be used for generating the signal.
-
-        Parameters:
-        todo
-        """
-        pass
-
-        # peak_freq = 14
-        # fwhm = 15
-        # hz = np.linspace(0,eeg_noestacionario["srate"],eeg_noestacionario["muestras"]);
-
-        # s = fwhm*(2*np.pi-1)/(4*np.pi) #normalized width
-        # x  = hz-peak_freq #shifted frequencies
-        # gauss = np.exp((-.5)*(x/s)**2) #gaussian
-
-        # muestras = eeg_noestacionario["muestras"]
-        # for canal in range(eeg_noestacionario["canales"]):
-        #     for trial in range(eeg_noestacionario["trials"]):
-        #         ##coeficientes de fourier para el espectro aleatorio
-        #         fc = np.random.rand(muestras)*np.exp(2j*np.pi*np.random.rand(muestras))
-        #         fc = fc*gauss
-
-        #         eeg_noestacionario["eeg"][canal,:,trial]=np.fft.ifft(fc).real
-
-        # return gauss
 
 
     def addMetaData(self, metadata:dict):
@@ -182,4 +185,7 @@ if __name__ == "__main__":
     print(hiamp.info.nominal_srate())
     print(hiamp.info.source_id())
     # print(hiamp.info.as_xml())
-    hiamp.startStreaming(chunk_size=32, sleep=0.01, total_time=1, delay=0.0,terminate=True)
+    hiamp.scale = 30
+    hiamp.startStreaming(chunk_size=64, sleep=0.01, total_time=5, delay=0.0,terminate=True,
+                          peak_freq=14, fwhm=15)
+    print("Finished script.")

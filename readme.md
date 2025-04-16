@@ -14,7 +14,7 @@ PyHIamp es un desarrollo del **Laboratorio de Neruociencias e Inteligencia Artif
 
 ## Versión
 
-- 0.0.1: Se genera estructura de carpetas y se generan los nombres de las clases, *Sender*, *Reciever* y *Logger* del módulo *pyhiamp. Se trabaja sobre signal.dummyHiamp.
+- 0.1.1: Se implementa método streaming.signal._getSyntheticEEG() para generar eeg sintéticos. Se mejorará a un espectro 1/f.
 
 ## Funcionamiento geneal
 

@@ -25,7 +25,7 @@ Los datos provenientes del amplificador, como los eventos y marcadores generados
 ## Características
 
 - [ ] Recibir datos de señal y eventos provenientes de g.HIamp y almacenarlos en un archivo XDF usando LabRecorder.
-- [X] Generar eventos y enviarlos a través de LSL.
+- [ ] Generar eventos y enviarlos a través de LSL.
 - [X] Almacenar los datos en un archivo [XDF](https://github.com/sccn/xdf) usando LabRecorder.
 - [ ] Entorno gráfico para ejecutar los módulos de PyHiamp de manera separada, con mensajes de estado de sesión, entre otros datos útiles.
 - [X] Sintetizador de señal para emular el g.HIAMP.
@@ -87,5 +87,3 @@ En teoría, todo está listo para usar PyHIamp.
 - [Lab Streaming Layers for Brain Data with Python](https://www.youtube.com/watch?v=oLulfdNI3E0&ab_channel=EsbenKran)
 - [Demo 1 The Lab Streaming Layer](https://www.youtube.com/watch?v=Y1at7yrcFW0&ab_channel=TheQualcommInstitute)
 - [liblsl docs](https://labstreaminglayer.readthedocs.io/projects/liblsl/index.html)
-
-## Licencia

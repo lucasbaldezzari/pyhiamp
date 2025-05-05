@@ -72,7 +72,13 @@ Para instalar PyHIamp se puede usar el comando ``pip install pyhiamp`` (es impor
 
 Descargar e instalar [LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder).
 
-### 6. Uso
+### 6. Obteniendo datos desde g.HIAMP
+
+Para poder obtener datos desde el almplificador g.HIAMP es necesario ejectutar gNEEDaccess de LSL. Se puede descargar desde aquí [App-g.Tec/gNEEDaccess](https://github.com/labstreaminglayer/App-g.Tec/releases) o bien se puede descargar la versión [v0.14](https://github.com/lucasbaldezzari/pyhiamp/apps) desde la sección [apps](https://github.com/lucasbaldezzari/pyhiamp/apps).
+
+
+
+### 7. Uso
 
 En teoría, todo está listo para usar PyHIamp.
 

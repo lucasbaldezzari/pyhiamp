@@ -74,9 +74,16 @@ Descargar e instalar [LabRecorder](https://github.com/labstreaminglayer/App-LabR
 
 ### 6. Obteniendo datos desde g.HIAMP
 
-Para poder obtener datos desde el almplificador g.HIAMP es necesario ejectutar gNEEDaccess de LSL. Se puede descargar desde aquí [App-g.Tec/gNEEDaccess](https://github.com/labstreaminglayer/App-g.Tec/releases) o bien se puede descargar la versión [v0.14](https://github.com/lucasbaldezzari/pyhiamp/apps) desde la sección [apps](https://github.com/lucasbaldezzari/pyhiamp/apps).
+Para poder obtener datos desde el almplificador g.HIAMP es necesario ejectutar gNEEDaccess de LSL. Se puede descargar desde aquí [App-g.Tec/gNEEDaccess](https://github.com/labstreaminglayer/App-g.Tec/releases) o bien se puede descargar la versión *v0.14* desde la sección [apps](https://github.com/lucasbaldezzari/pyhiamp/tree/main/apps).
 
+#### Importante
 
+- Para que gNEEDaccess funcione correctamente es necesario que el servicio GDSServerService esté ejecutandose. En las pruebas realizadas, este servicio se ejecuta cuando se inicia *g.TecSuite*.
+- En mi experiencia, para poder obtener datos desde el g.HIAMP es necesario,
+1. Escanear el amplifcador con *Scan*.
+2. Conectar con *Connect*.
+3. Configurar el dispositivo con *Config Device*, aún si no hay nada que configurar, es necesario entrar a la ventana.
+4. Iniciar streaming con *Start*.
 
 ### 7. Uso
 

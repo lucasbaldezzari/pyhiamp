@@ -4,7 +4,8 @@ import numpy as np
 import keyboard
 from pylsl import StreamInfo, StreamOutlet, local_clock
 import logging
-logging.basicConfig(level=logging.INFO)
+
+logging.basicConfig(level=logging.WARNING)# Configuración básica del logger
 
 def safe_lsl_send(func):
     def wrapper(self, *args, **kwargs):
@@ -43,6 +44,9 @@ class MarkersGenerator:
         return f"{self.in_phase}_{mensaje}" if mensaje else self.in_phase
 
     def _advance_phase(self, mensaje=""):
+        """
+        Función para avanzar a la siguiente fase y enviar un marcador.
+        """
         now = local_clock()
         self.accumulated_time += now - self._last_phase_time
         self._last_phase_time = now
@@ -75,6 +79,18 @@ class MarkersGenerator:
             self._advance_phase(mensaje)
             return True
         return False
+    
+    def moveTo(self, phase_name, mensaje=""):
+        """
+        Método para mover manualmente a una fase específica y enviar un marcador.
+        """
+        if phase_name in self.phases:
+            self.in_phase = phase_name
+            self.next_transition = local_clock() + self.phases[phase_name]["duration"]
+            self._last_phase_time = local_clock()
+            self.outlet.push_sample([self._makeMensaje(mensaje)])
+        else:
+            logging.error(f"Fase '{phase_name}' no encontrada en las fases definidas.")
 
     def get_elapsed_time(self):
         return local_clock() - self.creation_time
@@ -85,21 +101,21 @@ class MarkersGenerator:
 if __name__ == "__main__":
     phases = {"precue": {"next": "cue", "duration": 1.0},
               "cue": {"next": "go", "duration": 0.5},
-              "go": {"next": "evaluate", "duration": 1.0},
-              "evaluate": {"next": "precue", "duration": 0.1},}
+              "go": {"next": "evaluate", "duration": 2.0},
+              "evaluate": {"next": "precue", "duration": 0.5},}
     
     markerGen = MarkersGenerator(phases,stream_name="Test_Markers",stream_type="Markers")
-
+    markerGen.next()
     try:
         while True:
             if markerGen.update():
-                print("fase:",markerGen.in_phase)
+                logging.debug(f"Marcador enviado: {markerGen.in_phase}")
                 # print("Tiempo transcurrido:", markerGen.get_elapsed_time())
-                print("Tiempo acumulado:", markerGen.get_accumulated_time())
+                logging.debug(f"Tiempo acumulado: {markerGen.get_accumulated_time()}")
             if keyboard.is_pressed("esc"):
-                print("Esc pressed. Exiting...")
+                logging.info("Escape por usuario. Saliendo...")
                 break
 
     except KeyboardInterrupt:
-        print("Nos fuimos...")
+        logging.info("Nos fuimos...")
         pass

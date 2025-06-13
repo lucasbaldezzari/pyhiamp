@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import QWidget, QApplication, QVBoxLayout, QLabel
 from PyQt5.QtCore import QTimer, Qt
 from pyhiamp.markers.MarkersGenerator import MarkersGenerator
 from pyhiamp.gui.SquareWidget import SquareWidget
@@ -58,6 +58,10 @@ class MainWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Presione Enter para iniciar o Escape para salir")
         self.setGeometry(100, 100, 400, 300)
+        #agrego un texto central en la ventana que diga Presione Enter para iniciar o Escape para salir
+        self.setStyleSheet("background-color: white;")
+
+        ##agrego los 
         self.initUI()
 
         ##chqueo que funcs_to_run y times_for_funcs no sean None
@@ -79,6 +83,19 @@ class MainWindow(QWidget):
             self.timers.append(timer)
 
     def initUI(self):
+        # Creamos el layout vertical
+        layout = QVBoxLayout()
+        
+        # Creamos el label con el mismo texto del título
+        label = QLabel("Presione Enter para iniciar o Escape para salir")
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet("font-size: 16px; color: black;")
+
+        # Agregamos el label al layout
+        layout.addWidget(label)
+
+        # Asignamos el layout a la ventana
+        self.setLayout(layout)
         self.show()
 
     def keyPressEvent(self, event):

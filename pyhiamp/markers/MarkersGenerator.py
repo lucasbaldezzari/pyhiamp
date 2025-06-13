@@ -110,7 +110,6 @@ if __name__ == "__main__":
         while True:
             if markerGen.update():
                 logging.debug(f"Marcador enviado: {markerGen.in_phase}")
-                # print("Tiempo transcurrido:", markerGen.get_elapsed_time())
                 logging.debug(f"Tiempo acumulado: {markerGen.get_accumulated_time()}")
             if keyboard.is_pressed("esc"):
                 logging.info("Escape por usuario. Saliendo...")

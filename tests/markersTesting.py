@@ -9,37 +9,53 @@ import numpy as np
 
 logging.basicConfig(level=logging.WARNING)  # Configuración básica del logger
 
-phases = {
-    "precue": {"next": "cue", "duration": 4.0},
-    "go": {"next": "go", "duration": 0.5},
-    "cue": {"next": "evaluate", "duration": 4.0},
-    "evaluate": {"next": "precue", "duration": 1.},
-}
-
 app = QApplication.instance()
 if app is None:
     app = QApplication(sys.argv)
 
-marcador1 = SquareWidget(x=200, y=200, size=120, color="black",
+marcador_inicio = SquareWidget(x=200, y=200, size=120, color="black",
                          text="Inicio Sesión", text_color="white")
-marcador2 = SquareWidget(x=400, y=200, size=120, color="black",
-                         text="Run", text_color="white")
+marcador_cue = SquareWidget(x=400, y=200, size=120, color="black",
+                         text="Cue", text_color="white")
+marcador_precue = SquareWidget(x=600, y=200, size=120, color="black",
+                         text="Precue", text_color="white")
+marcador_calibration = SquareWidget(x=800, y=200, size=120, color="white",
+                         text="Para calibrar\n sensores", text_color="black")
 
+phases = {
+    "start": {"next": "rest", "duration": 5.0},
+    "rest": {"next": "precue", "duration": 2.0},
+    "precue": {"next": "cue", "duration": 0.5},
+    "cue": {"next": "evaluate", "duration": 3.0},
+    "evaluate": {"next": "rest", "duration": 2.0},
+    "first_jump": {"next": "start", "duration": 0.1},}
 markerGen = MarkersGenerator(phases, stream_name="Test_Markers", stream_type="Markers")
 
 logger = TimerLogger()
-
 
 @intervalCounter(logger)
 def update_markers():
     if markerGen.update():
         logging.debug(f"Marcador enviado: {markerGen.in_phase}")
-        if markerGen.in_phase == "precue":
-            marcador1.change_color("#ffffff")
-            marcador2.change_color("#000000")
-        else:
-            marcador1.change_color("#000000")
-            marcador2.change_color("#ffffff")
+        if markerGen.in_phase == "start":
+            marcador_inicio.change_color("#ffffff")
+            marcador_cue.change_color("#000000")
+            marcador_precue.change_color("#000000")
+            ##dejo sin texto
+            marcador_inicio.change_text("")
+            marcador_cue.change_text("")
+            marcador_precue.change_text("")
+        elif markerGen.in_phase == "precue":
+            marcador_inicio.change_color("#000000")
+            marcador_precue.change_color("#ffffff")
+            marcador_cue.change_color("#000000")
+        elif markerGen.in_phase == "cue":
+            marcador_precue.change_color("#000000")
+            marcador_inicio.change_color("#000000")
+            marcador_cue.change_color("#ffffff")
+        elif markerGen.in_phase == "evaluate":
+            marcador_cue.change_color("#000000")
+            marcador_precue.change_color("#000000")
 
 def stop_test():
     if len(logger.timestamps) > 1:
@@ -122,7 +138,7 @@ class MainWindow(QWidget):
 # Creamos la ventana principal
 
 window = MainWindow(funcs_to_run=[update_markers],
-                    times_for_funcs=[1]) 
+                    times_for_funcs=[5]) 
 
 exit_code = app.exec_()
 sys.exit(exit_code)

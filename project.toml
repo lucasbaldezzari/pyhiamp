@@ -1,1 +1,33 @@
-TODO
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyhiamp"
+version = "0.1.0"
+description = "Paquete para obtener datos desde el g.HIAMP de g.tec usando LSL"
+authors = [
+    { name = "Lucas BALDEZZARI", email = "lucas.baldezzari@utec.edu.uy" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "mne",
+    "scikit-learn",
+    "pylsl",
+    "pyqtgraph",
+    "pandas",
+    "keyboard",
+]
+
+[project.urls]
+"Source" = "https://github.com/lucasbaldezzari/pyhiamp"
+"Homepage" = "https://github.com/lucasbaldezzari/pyhiamp"
+
+[tool.setuptools]
+packages = { find = {} }
+
+[tool.setuptools.packages.find]
+include = ["pyhiamp*"]

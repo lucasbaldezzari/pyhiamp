@@ -1,0 +1,7 @@
+numpy
+scipy
+mne
+scikit-learn
+pylsl
+pyqtgraph
+pandas

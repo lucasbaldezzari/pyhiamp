@@ -20,7 +20,7 @@ def main():
     info = StreamInfo("MyMarkerStream", "Markers", 1, 0, "string", "myuidw43536")
 
     contador = 0
-    max_markers = 50
+    max_markers = 25
 
     # next make an outlet
     outlet = StreamOutlet(info)
@@ -30,7 +30,7 @@ def main():
     while True:
         # pick a sample to send an wait for a bit
         outlet.push_sample([random.choice(markernames)])
-        time.sleep(random.random() * 3)
+        time.sleep(random.random() * 2)
         contador += 1
         if contador == max_markers:
             print(f"{max_markers} markers sent")

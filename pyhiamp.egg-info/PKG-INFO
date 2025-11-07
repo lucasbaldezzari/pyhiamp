@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: pyhiamp
+Version: 0.1.0
+Summary: Paquete para obtener datos desde el g.HIAMP de g.tec usando LSL
+Author: Lucas BALDEZZARI
+Author-email: lucas.baldezzari@utec.edu.uy
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: mne
+Requires-Dist: scikit-learn
+Requires-Dist: pylsl
+Requires-Dist: pyqtgraph
+Requires-Dist: pandas
+Dynamic: author
+Dynamic: author-email
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
